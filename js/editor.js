@@ -393,11 +393,16 @@ el.del.addEventListener("click", () => armed(el.del, "Tap again to delete", () =
   openFirstOrDraft();
   if (wasKnown){ if (removeSaved(id)) toast("Play deleted."); else toast("Couldn't delete that play. Try again."); }
 }));
+/* a new frame goes right after the one you're on (at the end from Full diagram). It starts empty, so nobody moves
+   in it and every frame after it plays out exactly as before. */
 el.addStep.addEventListener("click", () => {
   const p = cur(); if (p.steps.length >= 12) return;
-  stopAnim(); p.steps.push({note: "", actions: []}); S.step = p.steps.length - 1; S.full = false; S.sel = null; S.atEnd = false;
+  stopAnim();
+  const at = S.full ? p.steps.length : S.step + 1;
+  p.steps.splice(at, 0, {note: "", actions: []}); S.step = at; S.full = false; S.sel = null; S.atEnd = false;
   if (S.tool === "move" || S.tool === "ball") S.tool = "cut";
   renderTools(); changed();
+  if (at < p.steps.length - 1) toast(`Added frame ${at + 1} after frame ${at}. The frames after it moved back one.`);
 });
 el.undo.addEventListener("click", () => { const a = cur().steps[S.step].actions; if (!a.length) return; a.pop(); S.sel = null; changed(); });
 el.delLine.addEventListener("click", () => { if (S.sel === null) return; cur().steps[S.step].actions.splice(S.sel, 1); S.sel = null; changed(); });
