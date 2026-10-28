@@ -1,5 +1,6 @@
 /* Editor: the full drawing board. Plays save in this browser (localStorage). The first time it opens with nothing
-   saved it loads the site's plays.json. Export plays.json and upload it to the repo to update the team view. */
+   saved it loads the site's plays.json. With auto-publish on, changes go to the repo's plays.json a few seconds
+   after the last edit (see publish.js); otherwise export plays.json and upload it to update the team view. */
 (() => {
 "use strict";
 const P = window.Playbook;
@@ -16,8 +17,13 @@ const el = {
   addStep: $("#add-step"), undo: $("#undo"), delLine: $("#del-line"), clear: $("#clear-step"), delStep: $("#del-step"),
   stepNote: $("#step-note"), stepNoteLabel: $("#step-note-label"),
   exportBtn: $("#export"), copyJson: $("#copy-json"), reload: $("#reload-site"),
-  confirm: $("#reload-confirm"), confirmText: $("#reload-text"), reloadYes: $("#reload-yes"), reloadNo: $("#reload-no")
+  confirm: $("#reload-confirm"), confirmText: $("#reload-text"), reloadYes: $("#reload-yes"), reloadNo: $("#reload-no"),
+  pubStatus: $("#pub-status"), pubStatusText: $("#pub-status-text"), pubSettings: $("#pub-settings"), pubPanel: $("#pub-panel"),
+  pubSetup: $("#pub-setup"), pubManage: $("#pub-manage"), pubKey: $("#pub-key"), pubOn: $("#pub-on"), pubSetupMsg: $("#pub-setup-msg"),
+  pubDetail: $("#pub-detail"), pubNow: $("#pub-now"), pubForce: $("#pub-force"), pubReload: $("#pub-reload"), pubOff: $("#pub-off"),
+  pubClose: $("#pub-close"), fileTip: $("#file-tip")
 };
+const pub = P.publisher;
 const HINTS = {
   move: "Drag players into their starting spots. That works in frame 1; after that, players move by the lines you draw.",
   cut: "Drag from a player along the path they cut.",
@@ -68,8 +74,9 @@ function flushSave(){
   for (const id of S.dirty){ S.known.add(id); S.drafts.delete(id); }
   S.dirty.clear();
   setIdle(); renderList();
+  schedulePublish();
 }
-function removeSaved(id){ const all = lsRead(); delete all[id]; return lsWrite(all); }
+function removeSaved(id){ const all = lsRead(); delete all[id]; const ok = lsWrite(all); if (ok) schedulePublish(); return ok; }
 /* save right away if the page is closing in the middle of the short wait */
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden" && saveT) flushSave(); });
 window.addEventListener("pagehide", () => { if (saveT) flushSave(); });
@@ -96,10 +103,17 @@ function openFirstOrDraft(render = true){
   if (render) renderAll();
 }
 
+/* the team's plays: {entries, fp}. With a key, read the repo itself, since the site can be a minute or two behind. */
 async function fetchSitePlays(){
-  const res = await fetch("plays.json", {cache: "no-store"});
-  if (!res.ok) throw new Error("HTTP " + res.status);
-  return P.parsePlaysFile(await res.json());
+  let text = null;
+  const key = pub.getKey();
+  if (key){ try { text = (await pub.readRemote(key)).text; } catch (e){ text = null; } }
+  if (text === null){
+    const res = await fetch("plays.json", {cache: "no-store"});
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    text = await res.text();
+  }
+  return {entries: P.parsePlaysFile(JSON.parse(text)), fp: pub.fingerprint(text)};
 }
 
 /* ---------- rendering ---------- */
@@ -422,7 +436,7 @@ el.copyJson.addEventListener("click", async () => {
   if (await P.copyText(text)) toast(`Copied plays.json with ${playCount(JSON.parse(text).plays.length)}.`);
   else toast("This browser wouldn't copy. Use Export plays.json instead.");
 });
-let pending = null;   /* the site's plays, waiting for the person to confirm */
+let pending = null;   /* the site's plays {entries, fp}, waiting for the person to confirm */
 el.reload.addEventListener("click", async () => {
   el.reload.disabled = true; el.reload.textContent = "Checking the site…";
   try { pending = await fetchSitePlays(); }
@@ -430,19 +444,117 @@ el.reload.addEventListener("click", async () => {
   el.reload.disabled = false; el.reload.textContent = "Reload from site";
   if (!pending) return;
   const mine = sortedIds().filter(id => !S.drafts.has(id)).length;
-  el.confirmText.textContent = `Replace the ${playCount(mine)} saved in this browser with the ${playCount(pending.length)} on the site? Any changes you haven't exported will be lost.`;
+  el.confirmText.textContent = `Replace the ${playCount(mine)} saved in this browser with the ${playCount(pending.entries.length)} on the site? Any changes you haven't exported${pub.getKey() ? " or published" : ""} will be lost.`;
   el.confirm.hidden = false; el.reloadNo.focus();
 });
 el.reloadNo.addEventListener("click", () => { pending = null; el.confirm.hidden = true; el.reload.focus(); });
 el.reloadYes.addEventListener("click", () => {
   if (!pending) return;
-  const entries = pending; pending = null; el.confirm.hidden = true;
+  const {entries, fp} = pending; pending = null; el.confirm.hidden = true;
   clearTimeout(saveT); saveT = null;
   const all = {}; for (const [id, d] of entries) all[id] = bodyFor(normalize(d));
   if (!lsWrite(all)){ toast("This browser wouldn't save. Nothing changed."); return; }
   loadPlays(entries); setIdle(); el.notice.hidden = true;
+  cancelPublish(); pub.setBase(fp); if (pub.getKey()) setPub("published", "in step");
   toast(`Loaded ${playCount(entries.length)} from the site.`);
 });
+
+/* ---------- auto-publish to the team site ---------- */
+const PUBLISH_DELAY = 6000;   /* after the last change */
+let pubT = null, pubBusy = false, pubAgain = false, pubKind = "off", pubError = null, pubAt = null;
+function setPub(kind, detail){
+  pubKind = kind; pubError = kind === "failed" ? detail : null;
+  if (kind === "published" && detail !== "in step") pubAt = new Date();
+  const at = pubAt ? ` ${pubAt.toLocaleTimeString([], {hour: "numeric", minute: "2-digit"})}` : "";
+  el.pubStatus.dataset.kind = kind;
+  el.pubStatusText.textContent = ({
+    off: "Team site: auto-publish off", waiting: "Team site: publishing in a few seconds", publishing: "Team site: publishing",
+    published: pubAt ? `Team site: published${at}` : "Team site: up to date", conflict: "Team site: has newer plays", failed: "Team site: not published"
+  })[kind];
+  renderPubPanel();
+}
+function renderPubPanel(){
+  const on = !!pub.getKey();
+  el.pubSetup.hidden = on; el.pubManage.hidden = !on;
+  el.pubForce.hidden = el.pubReload.hidden = pubKind !== "conflict";
+  el.pubNow.hidden = pubKind === "conflict";
+  el.pubDetail.textContent = ({
+    waiting: "Your latest changes go to the team site a few seconds after you stop editing.",
+    publishing: "Sending your plays to the team site now.",
+    published: `Auto-publish is on. ${pubAt ? `Your plays went to the team site at${" " + pubAt.toLocaleTimeString([], {hour: "numeric", minute: "2-digit"})}. Teammates see them about a minute or two after that.` : "The team site has the same plays as this editor."}`,
+    conflict: "The team site has plays that this editor doesn't, from another device or an uploaded plays.json, so nothing was published to keep them safe. Reload from site to get the team's plays (changes here that aren't on the site will be lost), or replace the team's plays with the ones in this editor.",
+    failed: pubError || "Your plays didn't publish.",
+    off: ""
+  })[pubKind];
+  el.pubSettings.textContent = on ? "Auto-publish on" : "Auto-publish…";
+  el.fileTip.textContent = on ? "Your plays save in this browser and go to the team site a few seconds after you stop editing."
+    : "Your plays save in this browser. To update the team view, turn on auto-publish, or export plays.json and upload it to the repo.";
+}
+function openPubPanel(){ el.pubPanel.hidden = false; el.pubStatus.setAttribute("aria-expanded", "true"); renderPubPanel(); (pub.getKey() ? el.pubClose : el.pubKey).focus(); }
+function closePubPanel(){ el.pubPanel.hidden = true; el.pubStatus.setAttribute("aria-expanded", "false"); }
+function cancelPublish(){ clearTimeout(pubT); pubT = null; pubAgain = false; }
+function schedulePublish(delay = PUBLISH_DELAY){
+  if (!pub.getKey() || pubKind === "conflict") return;
+  clearTimeout(pubT); pubT = setTimeout(() => publishNow(false), delay);
+  if (!pubBusy) setPub("waiting");
+}
+/* force = replace the team's plays even if they changed somewhere else */
+async function publishNow(force){
+  clearTimeout(pubT); pubT = null;
+  const key = pub.getKey(); if (!key){ setPub("off"); return; }
+  if (pubBusy){ pubAgain = true; return; }
+  pubBusy = true; setPub("publishing");
+  try {
+    for (let attempt = 0; ; attempt++){
+      const text = exportText(), mine = pub.fingerprint(text);
+      const remote = await pub.readRemote(key), theirs = pub.fingerprint(remote.text);
+      if (theirs === mine){ pub.setBase(mine); setPub("published", pub.getBase() === mine && !force ? "in step" : undefined); break; }
+      if (!force && theirs !== pub.getBase()){ pubAgain = false; setPub("conflict"); break; }
+      try {
+        await pub.writeRemote(key, text, remote.sha, "Update plays from the editor");
+        pub.setBase(mine); setPub("published"); break;
+      } catch (e){ if (e.kind === "moved" && attempt < 2) continue; throw e; }
+    }
+  } catch (e){
+    setPub("failed", e.message || "Your plays didn't publish.");
+  } finally {
+    pubBusy = false;
+    if (pubAgain){ pubAgain = false; schedulePublish(1000); }
+  }
+}
+function unpublishedChanges(){ return pub.fingerprint(exportText()) !== pub.getBase(); }
+function startPublishing(){
+  if (!pub.getKey()){ setPub("off"); return; }
+  /* finish publishing changes from last time, if the page closed before they went out */
+  if (unpublishedChanges()) schedulePublish(1500); else setPub("published", "in step");
+}
+el.pubStatus.addEventListener("click", () => el.pubPanel.hidden ? openPubPanel() : closePubPanel());
+el.pubSettings.addEventListener("click", () => el.pubPanel.hidden ? openPubPanel() : closePubPanel());
+el.pubClose.addEventListener("click", closePubPanel);
+el.pubOn.addEventListener("click", async () => {
+  const key = el.pubKey.value.trim();
+  const say = msg => { el.pubSetupMsg.textContent = msg; el.pubSetupMsg.hidden = !msg; };
+  if (!key){ say("Paste the key from GitHub first."); el.pubKey.focus(); return; }
+  el.pubOn.disabled = true; el.pubOn.textContent = "Checking…"; say("");
+  try { await pub.readRemote(key); }
+  catch (e){ say(e.message); el.pubOn.disabled = false; el.pubOn.textContent = "Turn on"; return; }
+  el.pubOn.disabled = false; el.pubOn.textContent = "Turn on";
+  if (!pub.setKey(key)){ say("This browser wouldn't save the key."); return; }
+  el.pubKey.value = "";
+  toast("Auto-publish is on. Publishing your plays now.");
+  await publishNow(true);
+});
+el.pubKey.addEventListener("keydown", e => { if (e.key === "Enter"){ e.preventDefault(); el.pubOn.click(); } });
+el.pubNow.addEventListener("click", () => publishNow(false));
+el.pubForce.addEventListener("click", () => armed(el.pubForce, "Tap again to replace the team's plays", () => publishNow(true)));
+el.pubReload.addEventListener("click", () => { closePubPanel(); el.reload.click(); });
+el.pubOff.addEventListener("click", () => {
+  cancelPublish(); pub.setKey(null); setPub("off");
+  toast("Auto-publish is off. The key is removed from this browser.");
+});
+window.addEventListener("online", () => { if (pub.getKey() && pubKind === "failed") schedulePublish(1000); });
+/* warn before closing with changes that haven't gone out yet */
+window.addEventListener("beforeunload", e => { if (pubT || pubBusy){ e.preventDefault(); e.returnValue = ""; } });
 
 /* ---------- start ---------- */
 (async () => {
@@ -451,9 +563,9 @@ el.reloadYes.addEventListener("click", () => {
   else {
     /* first time in this browser: start from the site's plays */
     try {
-      const entries = await fetchSitePlays();
+      const {entries, fp} = await fetchSitePlays();
       const all = {}; for (const [id, d] of entries) all[id] = bodyFor(normalize(d));
-      loadPlays(entries);
+      loadPlays(entries); pub.setBase(fp);
       if (lsWrite(all)) setIdle();
       else { setStatus("error", "Not saving"); el.notice.textContent = "This browser isn't letting the page save, so changes are lost when you close it. Export plays.json before you leave."; el.notice.hidden = false; }
     } catch (e){
@@ -462,6 +574,7 @@ el.reloadYes.addEventListener("click", () => {
       el.notice.hidden = false;
     }
   }
+  startPublishing();
 })();
 P.registerServiceWorker();
 })();

@@ -13,3 +13,21 @@ a.btn{text-decoration:none; display:inline-block}
   .play-list li{flex:0 0 auto; max-width:230px; scroll-snap-align:start}
   .play-item{border-color:var(--rule); background:var(--raise)}
 }
+
+/* auto-publish */
+button.status{font-family:var(--body); cursor:pointer}
+button.status:hover{border-color:var(--muted)}
+.status[data-kind="off"] .dot{background:var(--muted)}
+.status[data-kind="waiting"] .dot,.status[data-kind="publishing"] .dot{background:var(--warn)}
+.status[data-kind="published"] .dot{background:var(--ok)}
+.status[data-kind="conflict"] .dot,.status[data-kind="failed"] .dot{background:var(--accent)}
+.status[data-kind="conflict"],.status[data-kind="failed"]{color:var(--ink); border-color:var(--accent)}
+.pub-panel{border-color:var(--rule); background:var(--panel)}
+.pub-panel h3{font-size:20px}
+.pub-body{display:grid; gap:10px}
+.pub-body p{margin:0; font-weight:400}
+.pub-steps{margin:0; padding-left:22px; display:grid; gap:4px}
+.pub-steps a{color:var(--accent); font-weight:600}
+.key-row{display:flex; flex-wrap:wrap; gap:8px}
+.key-row input{flex:1 1 240px; font:500 15px/1.35 var(--body); color:var(--ink); background:var(--raise); border:1px solid var(--rule); border-radius:8px; padding:8px 10px; min-width:0}
+.pub-msg{color:var(--accent); font-weight:600!important}

@@ -119,21 +119,46 @@ el.copy.addEventListener("click", async () => {
 el.link.addEventListener("focus", () => el.link.select());
 el.share.addEventListener("click", e => { if (e.target === el.share) el.share.close(); });
 
-/* ---------- start ---------- */
-async function load(){
+/* ---------- start, and new plays while the page is open ---------- */
+/* Checks for a new plays.json every minute and whenever the page comes back into view, so plays the coach
+   publishes show up without anyone reloading. The play someone is watching only changes if it was edited. */
+const CHECK_EVERY = 60000;
+const sameFile = (a, b) => (a || "").replace(/"exportedAt":\s*"[^"]*"/, "") === (b || "").replace(/"exportedAt":\s*"[^"]*"/, "");
+let lastText = null, checking = false;
+function applyPlays(text){
+  const entries = P.parsePlaysFile(JSON.parse(text)).map(([id, d]) => [id, P.normalize(d)]).sort(P.byCreated);
+  const first = lastText === null;
+  const before = curId !== null && plays.has(curId) ? JSON.stringify(plays.get(curId)) : null;
+  plays.clear();
+  for (const [id, p] of entries) plays.set(id, p);
+  lastText = text;
+  el.msg.hidden = plays.size > 0;
+  if (!plays.size){ el.msg.textContent = "No plays yet."; el.groups.textContent = ""; el.count.textContent = ""; el.main.hidden = true; el.side.hidden = false; curId = null; return; }
+  if (first){ route(); return; }
+  if (curId === null){ route(); P.toast("The playbook was just updated."); return; }
+  if (!plays.has(curId)){ curId = null; route(); P.toast("That play was taken out of the playbook."); return; }
+  if (JSON.stringify(plays.get(curId)) !== before){
+    viewer.stopAnim(false);
+    S.step = Math.min(S.step, plays.get(curId).steps.length - 1); S.full = false; S.atEnd = false; S.sel = null;
+    renderList(); renderPlay(); P.toast("This play was just updated.");
+  } else { renderList(); P.toast("The playbook was just updated."); }
+}
+async function check(always = false){
+  if (checking || (document.hidden && !always)) return;
+  checking = true;
   try {
     const res = await fetch("plays.json", {cache: "no-cache"});
     if (!res.ok) throw new Error("HTTP " + res.status);
-    const entries = P.parsePlaysFile(await res.json()).map(([id, d]) => [id, P.normalize(d)]).sort(P.byCreated);
-    for (const [id, p] of entries) plays.set(id, p);
+    const text = await res.text();
+    if (lastText === null || !sameFile(text, lastText)) applyPlays(text);
   } catch (e){
-    el.msg.textContent = "Couldn't load the plays. Check your connection and reload the page.";
-    return;
-  }
-  el.msg.hidden = plays.size > 0;
-  if (!plays.size) el.msg.textContent = "No plays yet.";
-  route();
+    if (lastText === null) el.msg.textContent = "Couldn't load the plays. Check your connection and reload the page.";
+  } finally { checking = false; }
 }
-load();
+check(true);
+setInterval(check, CHECK_EVERY);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) check(); });
+window.addEventListener("focus", () => check());
+window.addEventListener("pageshow", e => { if (e.persisted) check(); });
 P.registerServiceWorker();
 })();
