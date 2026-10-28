@@ -1,0 +1,15 @@
+/* Editor only. */
+.top-right{display:flex; flex-wrap:wrap; align-items:center; gap:8px}
+a.btn{text-decoration:none; display:inline-block}
+.file-bar{display:flex; flex-wrap:wrap; align-items:center; gap:6px}
+.file-tip{margin-left:4px}
+.confirm{display:grid; gap:10px; padding:12px 14px; border:1px solid var(--accent); border-radius:10px; background:var(--accent-soft); max-width:80ch}
+.confirm p{margin:0; font-weight:500}
+.confirm-actions{display:flex; flex-wrap:wrap; gap:8px}
+
+/* plays scroll sideways above the board on narrow screens */
+@media (max-width:899px){
+  .play-list{flex-direction:row; overflow-x:auto; padding-bottom:4px; scroll-snap-type:x proximity}
+  .play-list li{flex:0 0 auto; max-width:230px; scroll-snap-align:start}
+  .play-item{border-color:var(--rule); background:var(--raise)}
+}
