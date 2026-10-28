@@ -6,7 +6,7 @@ const TIMEOUT_MS = 3500;
 const FILES = [
   "./", "index.html", "edit.html", "plays.json", "favicon.svg",
   "css/board.css", "css/team.css", "css/edit.css",
-  "js/core.js", "js/draw.js", "js/viewer.js", "js/team.js", "js/editor.js", "vendor/qrcode.js",
+  "js/core.js", "js/draw.js", "js/viewer.js", "js/team.js", "js/editor.js", "js/publish.js", "vendor/qrcode.js",
   "fonts/barlow-400.woff2", "fonts/barlow-500.woff2", "fonts/barlow-600.woff2", "fonts/barlow-700.woff2",
   "fonts/big-shoulders-display.woff2", "fonts/permanent-marker.woff2"
 ];

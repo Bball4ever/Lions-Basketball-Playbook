@@ -14,6 +14,7 @@
 <script src="js/core.js" defer></script>
 <script src="js/draw.js" defer></script>
 <script src="js/viewer.js" defer></script>
+<script src="js/publish.js" defer></script>
 <script src="js/editor.js" defer></script>
 </head>
 <body>
@@ -28,6 +29,7 @@
     </div>
     <div class="top-right">
       <div class="status" id="status" data-kind="pending" role="status"><span class="dot"></span><span id="status-text">Loading plays</span></div>
+      <button class="status pub-status" id="pub-status" data-kind="off" type="button" aria-controls="pub-panel" aria-expanded="false"><span class="dot"></span><span id="pub-status-text">Team site: auto-publish off</span></button>
       <a class="btn small" href="./">Team view</a>
     </div>
   </header>
@@ -35,7 +37,8 @@
     <button class="btn small" id="export" type="button">Export plays.json</button>
     <button class="btn small" id="copy-json" type="button">Copy JSON</button>
     <button class="btn small" id="reload-site" type="button">Reload from site</button>
-    <span class="fine file-tip">Your plays save in this browser. To update the team view, export plays.json and upload it to the repo.</span>
+    <button class="btn small" id="pub-settings" type="button">Auto-publish…</button>
+    <span class="fine file-tip" id="file-tip">Your plays save in this browser. To update the team view, turn on auto-publish, or export plays.json and upload it to the repo.</span>
   </div>
   <section class="confirm" id="reload-confirm" role="alertdialog" aria-labelledby="reload-text" hidden>
     <p id="reload-text"></p>
@@ -43,6 +46,37 @@
       <button class="btn primary" id="reload-yes" type="button">Replace my plays</button>
       <button class="btn" id="reload-no" type="button">Cancel</button>
     </div>
+  </section>
+  <section class="confirm pub-panel" id="pub-panel" aria-labelledby="pub-title" hidden>
+    <h3 id="pub-title">Publish to the team automatically</h3>
+    <div class="pub-body" id="pub-setup">
+      <p>With this on, your plays go to the team site a few seconds after you stop editing, and teammates see them about a minute or two later without reloading.</p>
+      <p>It needs a GitHub key that can only change this one repo. The key is saved in this browser only, never on the site. Set it up once on each computer or phone you edit on:</p>
+      <ol class="pub-steps">
+        <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub's new key page</a>, signed in as the repo owner.</li>
+        <li>Name it <b>Lions Playbook editor</b> and pick an expiration. A year is fine.</li>
+        <li>Under <b>Repository access</b>, choose <b>Only select repositories</b> and pick <b>Lions-Basketball-Playbook</b>.</li>
+        <li>Under <b>Permissions</b>, add <b>Contents</b> and set it to <b>Read and write</b>.</li>
+        <li>Click <b>Generate token</b>, copy it, and paste it here.</li>
+      </ol>
+      <p class="fine">Turning this on publishes the plays in this editor right away, so they become the team's plays.</p>
+      <div class="key-row">
+        <label class="sr" for="pub-key">GitHub key</label>
+        <input id="pub-key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste the key (github_pat_…)">
+        <button class="btn primary" id="pub-on" type="button">Turn on</button>
+      </div>
+      <p class="pub-msg" id="pub-setup-msg" role="status" hidden></p>
+    </div>
+    <div class="pub-body" id="pub-manage" hidden>
+      <p id="pub-detail" role="status"></p>
+      <div class="confirm-actions">
+        <button class="btn primary" id="pub-now" type="button">Publish now</button>
+        <button class="btn primary" id="pub-force" type="button" hidden>Replace the team's plays with mine</button>
+        <button class="btn" id="pub-reload" type="button" hidden>Reload from site</button>
+        <button class="btn" id="pub-off" type="button">Turn off auto-publish</button>
+      </div>
+    </div>
+    <div class="confirm-actions"><button class="btn" id="pub-close" type="button">Close</button></div>
   </section>
   <p class="notice" id="notice" hidden></p>
 
