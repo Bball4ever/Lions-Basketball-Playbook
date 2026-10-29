@@ -1,7 +1,7 @@
 {
  "format": "playbook-board",
  "version": 1,
- "exportedAt": "2026-10-28T22:49:53.262Z",
+ "exportedAt": "2026-10-29T12:26:49.734Z",
  "plays": [
   {
    "id": "pmvl7pqo5wbi1",
@@ -226,7 +226,7 @@
      "note": ""
     }
    ],
-   "updatedAt": "2026-10-26T16:29:07.478Z"
+   "updatedAt": "2026-10-28T18:51:19.644Z"
   },
   {
    "id": "pmvph56j3wsfs",
@@ -2588,33 +2588,34 @@
    "updatedAt": "2026-10-28T17:09:29.645Z"
   },
   {
-   "id": "pmvsosuootkxw",
+   "id": "pmvsiu8k9qouw",
    "court": "half",
-   "createdAt": "2026-10-28T22:29:32.376Z",
+   "createdAt": "2026-10-28T19:42:39.327Z",
    "kind": "Baseline inbound",
    "name": "Elevator",
    "note": "",
    "readout": [
     "Setup: 1 at the right block, 2 at out of bounds on the baseline with the ball, 3 at the left block, 4 at the right elbow, 5 at the left elbow.",
-    "Frame 1: 1 cuts from the right block to the right corner. 2 passes to 1 (the right corner).",
-    "Frame 2: 4 goes from the right elbow to set a screen at the high post. 5 goes from the left elbow to set a screen at the high post. 2 cuts from out of bounds on the baseline to the top of the key.",
-    "Frame 3: 1 passes to 2 (the top of the key).",
-    "Frame 4: 2 shoots from the top of the key."
+    "Frame 1: 1 cuts from the right block to the right corner.",
+    "Frame 2: 2 passes to 1 (the right corner).",
+    "Frame 3: 5 goes from the left elbow to set a screen at the high post. 4 goes from the right elbow to set a screen at the high post. 2 cuts from out of bounds on the baseline to the top of the key.",
+    "Frame 4: 1 passes to 2 (the top of the key).",
+    "Frame 5: 2 shoots from the top of the key."
    ],
    "setup": {
     "ball": "2",
     "players": {
      "1": [
-      32.4,
-      6.8
+      31.4,
+      7.3
      ],
      "2": [
-      31.9,
-      -2.2
+      31.1,
+      -2.3
      ],
      "3": [
-      17.4,
-      6.2
+      18,
+      8
      ],
      "4": [
       31,
@@ -2633,17 +2634,26 @@
       {
        "path": [
         [
-         32.4,
-         6.8
+         31.4,
+         7.3
         ],
         [
-         47.6,
-         4.1
+         39.5,
+         4.5
+        ],
+        [
+         45.4,
+         3.9
         ]
        ],
        "player": "1",
        "type": "cut"
-      },
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
       {
        "player": "2",
        "to": "1",
@@ -2657,46 +2667,16 @@
       {
        "path": [
         [
-         31,
-         19
-        ],
-        [
-         27.9,
-         20.5
-        ],
-        [
-         26.6,
-         19.6
-        ],
-        [
-         26.5,
-         18.2
-        ]
-       ],
-       "player": "4",
-       "type": "screen"
-      },
-      {
-       "path": [
-        [
          19,
          19
         ],
         [
-         19.4,
-         19.8
+         23,
+         18.7
         ],
         [
-         21.2,
-         20.6
-        ],
-        [
-         22.8,
-         19.5
-        ],
-        [
-         22.9,
-         18.4
+         23.4,
+         17.7
         ]
        ],
        "player": "5",
@@ -2705,28 +2685,50 @@
       {
        "path": [
         [
-         31.9,
-         -2.2
+         31,
+         19
         ],
         [
-         29.5,
-         -0.4
+         28.6,
+         18.9
         ],
         [
-         26.4,
-         4.3
+         27.9,
+         17.5
+        ]
+       ],
+       "player": "4",
+       "type": "screen"
+      },
+      {
+       "path": [
+        [
+         31.1,
+         -2.3
         ],
         [
-         24.7,
-         9.2
+         29,
+         0.8
         ],
         [
-         24.1,
-         18.7
+         25.7,
+         8.4
         ],
         [
-         26.4,
-         28.1
+         24.9,
+         12.9
+        ],
+        [
+         25.1,
+         20.1
+        ],
+        [
+         26.8,
+         26.8
+        ],
+        [
+         27.9,
+         27
         ]
        ],
        "player": "2",
@@ -2755,7 +2757,7 @@
      "note": ""
     }
    ],
-   "updatedAt": "2026-10-28T22:33:07.293Z"
+   "updatedAt": "2026-10-28T19:52:14.379Z"
   }
  ]
 }
