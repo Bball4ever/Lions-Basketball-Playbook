@@ -1,7 +1,7 @@
 {
  "format": "playbook-board",
  "version": 1,
- "exportedAt": "2026-11-02T18:47:49.729Z",
+ "exportedAt": "2026-11-02T18:47:58.465Z",
  "plays": [
   {
    "id": "pmvl7pqo5wbi1",
@@ -3175,7 +3175,7 @@
    "note": "",
    "readout": [
     "Setup: 1 at the right elbow, 2 at out of bounds on the baseline with the ball, 3 at the left elbow, 4 at the left short corner, 5 at the right block.",
-    "Frame 1: 2 passes to 5 (the right block)."
+    "Frame 1: 1 goes from the right elbow to set a screen at the high post. 2 passes to 5 (the right block)."
    ],
    "setup": {
     "ball": "2",
@@ -3210,12 +3210,26 @@
        "player": "2",
        "to": "5",
        "type": "pass"
+      },
+      {
+       "path": [
+        [
+         32.9,
+         18.5
+        ],
+        [
+         24.8,
+         18.6
+        ]
+       ],
+       "player": "1",
+       "type": "screen"
       }
      ],
      "note": ""
     }
    ],
-   "updatedAt": "2026-11-02T18:47:43.314Z"
+   "updatedAt": "2026-11-02T18:47:52.042Z"
   }
  ]
 }
