@@ -1,7 +1,7 @@
 {
  "format": "playbook-board",
  "version": 1,
- "exportedAt": "2026-11-02T18:46:42.813Z",
+ "exportedAt": "2026-11-02T18:47:39.513Z",
  "plays": [
   {
    "id": "pmvl7pqo5wbi1",
@@ -3174,34 +3174,34 @@
    "name": "Twist",
    "note": "",
    "readout": [
-    "Setup: Box inbound set. 1 at out of bounds on the baseline with the ball, 2 at the right block, 3 at the left block, 4 at the right elbow, 5 at the left elbow.",
+    "Setup: 1 at the right elbow, 2 at out of bounds on the baseline with the ball, 3 at the left elbow, 4 at the left short corner, 5 at the right block.",
     "Frame 1: Nothing drawn yet."
    ],
    "setup": {
-    "ball": "1",
+    "ball": "2",
     "players": {
      "1": [
-      30,
-      -2.5
+      32.9,
+      18.5
      ],
      "2": [
-      32,
-      8
+      30.9,
+      -2.5
      ],
      "3": [
-      18,
-      8
+      17,
+      18.8
      ],
      "4": [
-      31,
-      19
+      16.8,
+      7.3
      ],
      "5": [
-      19,
-      19
+      33,
+      6.7
      ]
     },
-    "preset": "Box inbound"
+    "preset": null
    },
    "steps": [
     {
@@ -3209,7 +3209,7 @@
      "note": ""
     }
    ],
-   "updatedAt": "2026-11-02T18:46:36.401Z"
+   "updatedAt": "2026-11-02T18:47:33.100Z"
   }
  ]
 }
