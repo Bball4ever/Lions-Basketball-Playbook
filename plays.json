@@ -1,7 +1,7 @@
 {
  "format": "playbook-board",
  "version": 1,
- "exportedAt": "2026-10-29T12:26:49.734Z",
+ "exportedAt": "2026-11-02T18:45:19.197Z",
  "plays": [
   {
    "id": "pmvl7pqo5wbi1",
@@ -226,7 +226,7 @@
      "note": ""
     }
    ],
-   "updatedAt": "2026-10-28T18:51:19.644Z"
+   "updatedAt": "2026-10-26T16:29:07.478Z"
   },
   {
    "id": "pmvph56j3wsfs",
@@ -2588,34 +2588,33 @@
    "updatedAt": "2026-10-28T17:09:29.645Z"
   },
   {
-   "id": "pmvsiu8k9qouw",
+   "id": "pmvsosuootkxw",
    "court": "half",
-   "createdAt": "2026-10-28T19:42:39.327Z",
+   "createdAt": "2026-10-28T22:29:32.376Z",
    "kind": "Baseline inbound",
    "name": "Elevator",
    "note": "",
    "readout": [
     "Setup: 1 at the right block, 2 at out of bounds on the baseline with the ball, 3 at the left block, 4 at the right elbow, 5 at the left elbow.",
-    "Frame 1: 1 cuts from the right block to the right corner.",
-    "Frame 2: 2 passes to 1 (the right corner).",
-    "Frame 3: 5 goes from the left elbow to set a screen at the high post. 4 goes from the right elbow to set a screen at the high post. 2 cuts from out of bounds on the baseline to the top of the key.",
-    "Frame 4: 1 passes to 2 (the top of the key).",
-    "Frame 5: 2 shoots from the top of the key."
+    "Frame 1: 1 cuts from the right block to the right corner. 2 passes to 1 (the right corner).",
+    "Frame 2: 4 goes from the right elbow to set a screen at the high post. 5 goes from the left elbow to set a screen at the high post. 2 cuts from out of bounds on the baseline to the top of the key.",
+    "Frame 3: 1 passes to 2 (the top of the key).",
+    "Frame 4: 2 shoots from the top of the key."
    ],
    "setup": {
     "ball": "2",
     "players": {
      "1": [
-      31.4,
-      7.3
+      32.4,
+      6.8
      ],
      "2": [
-      31.1,
-      -2.3
+      31.9,
+      -2.2
      ],
      "3": [
-      18,
-      8
+      17.4,
+      6.2
      ],
      "4": [
       31,
@@ -2634,26 +2633,17 @@
       {
        "path": [
         [
-         31.4,
-         7.3
+         32.4,
+         6.8
         ],
         [
-         39.5,
-         4.5
-        ],
-        [
-         45.4,
-         3.9
+         47.6,
+         4.1
         ]
        ],
        "player": "1",
        "type": "cut"
-      }
-     ],
-     "note": ""
-    },
-    {
-     "actions": [
+      },
       {
        "player": "2",
        "to": "1",
@@ -2667,34 +2657,20 @@
       {
        "path": [
         [
-         19,
-         19
-        ],
-        [
-         23,
-         18.7
-        ],
-        [
-         23.4,
-         17.7
-        ]
-       ],
-       "player": "5",
-       "type": "screen"
-      },
-      {
-       "path": [
-        [
          31,
          19
         ],
         [
-         28.6,
-         18.9
+         27.9,
+         20.5
         ],
         [
-         27.9,
-         17.5
+         26.6,
+         19.6
+        ],
+        [
+         26.5,
+         18.2
         ]
        ],
        "player": "4",
@@ -2703,32 +2679,54 @@
       {
        "path": [
         [
-         31.1,
-         -2.3
+         19,
+         19
         ],
         [
-         29,
-         0.8
+         19.4,
+         19.8
         ],
         [
-         25.7,
-         8.4
+         21.2,
+         20.6
         ],
         [
-         24.9,
-         12.9
+         22.8,
+         19.5
         ],
         [
-         25.1,
-         20.1
+         22.9,
+         18.4
+        ]
+       ],
+       "player": "5",
+       "type": "screen"
+      },
+      {
+       "path": [
+        [
+         31.9,
+         -2.2
         ],
         [
-         26.8,
-         26.8
+         29.5,
+         -0.4
         ],
         [
-         27.9,
-         27
+         26.4,
+         4.3
+        ],
+        [
+         24.7,
+         9.2
+        ],
+        [
+         24.1,
+         18.7
+        ],
+        [
+         26.4,
+         28.1
         ]
        ],
        "player": "2",
@@ -2757,7 +2755,416 @@
      "note": ""
     }
    ],
-   "updatedAt": "2026-10-28T19:52:14.379Z"
+   "updatedAt": "2026-10-28T22:33:07.293Z"
+  },
+  {
+   "id": "pmvzlnu1vvp6j",
+   "court": "half",
+   "createdAt": "2026-11-02T18:36:02.660Z",
+   "kind": "Man offense",
+   "name": "Down",
+   "note": "",
+   "readout": [
+    "Setup: 1 at the left slot with the ball, 2 at the right corner, 3 at the left corner, 4 at the right slot, 5 at the right block.",
+    "Frame 1: 5 cuts from the right block to the high post.",
+    "Frame 2: 1 passes to 5 (the high post).",
+    "Frame 3: 1 goes from the left slot to set a screen at the left short corner. 3 cuts from the left corner to the left short corner.",
+    "Frame 4: 3 cuts from the left short corner to the left slot. 4 goes from the right slot to set a screen at the right short corner. 2 cuts from the right corner to the right short corner.",
+    "Frame 5: 2 cuts from the right short corner to the right slot. 1 cuts from the left short corner to the left corner. 3 cuts from the left slot to the right block. 4 cuts from the right short corner to the right corner.",
+    "Frame 6: 2 cuts from the right slot to the left block.",
+    "Frame 7: 4 cuts from the right corner to the right wing. 1 cuts from the left corner to the left wing. 2 cuts from the left block to the left corner. 3 cuts from the right block to the right corner."
+   ],
+   "setup": {
+    "ball": "1",
+    "players": {
+     "1": [
+      8.9,
+      25.6
+     ],
+     "2": [
+      47.3,
+      3.2
+     ],
+     "3": [
+      2.7,
+      3.3
+     ],
+     "4": [
+      40.7,
+      25.2
+     ],
+     "5": [
+      32,
+      7
+     ]
+    },
+    "preset": null
+   },
+   "steps": [
+    {
+     "actions": [
+      {
+       "path": [
+        [
+         32,
+         7
+        ],
+        [
+         31.4,
+         13.7
+        ],
+        [
+         30.4,
+         17.2
+        ],
+        [
+         29,
+         19.8
+        ],
+        [
+         26.3,
+         21.2
+        ]
+       ],
+       "player": "5",
+       "type": "cut"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "player": "1",
+       "to": "5",
+       "type": "pass"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "path": [
+        [
+         8.9,
+         25.6
+        ],
+        [
+         10.6,
+         18.2
+        ],
+        [
+         11.2,
+         5.4
+        ]
+       ],
+       "player": "1",
+       "type": "screen"
+      },
+      {
+       "path": [
+        [
+         2.7,
+         3.3
+        ],
+        [
+         14,
+         3.3
+        ]
+       ],
+       "player": "3",
+       "type": "cut"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "path": [
+        [
+         14,
+         3.3
+        ],
+        [
+         10.9,
+         2.9
+        ],
+        [
+         8.7,
+         3.5
+        ],
+        [
+         7.5,
+         6.2
+        ],
+        [
+         7.6,
+         11.5
+        ],
+        [
+         9,
+         18.1
+        ],
+        [
+         10.8,
+         22.2
+        ],
+        [
+         12.7,
+         24
+        ]
+       ],
+       "player": "3",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         40.7,
+         25.2
+        ],
+        [
+         38.7,
+         5.4
+        ]
+       ],
+       "player": "4",
+       "type": "screen"
+      },
+      {
+       "path": [
+        [
+         47.3,
+         3.2
+        ],
+        [
+         35.6,
+         3.3
+        ]
+       ],
+       "player": "2",
+       "type": "cut"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "path": [
+        [
+         35.6,
+         3.3
+        ],
+        [
+         39.9,
+         3.4
+        ],
+        [
+         42,
+         6.6
+        ],
+        [
+         41.8,
+         13.8
+        ],
+        [
+         40.1,
+         23.7
+        ]
+       ],
+       "player": "2",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         11.2,
+         5.4
+        ],
+        [
+         2.1,
+         4
+        ]
+       ],
+       "player": "1",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         12.7,
+         24
+        ],
+        [
+         16.6,
+         25
+        ],
+        [
+         20.3,
+         25.1
+        ],
+        [
+         26.5,
+         24.1
+        ],
+        [
+         28.9,
+         22.9
+        ],
+        [
+         30.7,
+         20.7
+        ],
+        [
+         31.4,
+         18.8
+        ],
+        [
+         31.7,
+         6
+        ]
+       ],
+       "player": "3",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         38.7,
+         5.4
+        ],
+        [
+         48.3,
+         4.2
+        ]
+       ],
+       "player": "4",
+       "type": "cut"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "path": [
+        [
+         40.1,
+         23.7
+        ],
+        [
+         31.5,
+         25.7
+        ],
+        [
+         26.3,
+         25
+        ],
+        [
+         22.7,
+         23.7
+        ],
+        [
+         20.4,
+         20.6
+        ],
+        [
+         18.9,
+         17
+        ],
+        [
+         18.3,
+         7.5
+        ]
+       ],
+       "player": "2",
+       "type": "cut"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "path": [
+        [
+         48.3,
+         4.2
+        ],
+        [
+         43.1,
+         19.2
+        ],
+        [
+         40.8,
+         22.8
+        ]
+       ],
+       "player": "4",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         2.1,
+         4
+        ],
+        [
+         5.7,
+         17.4
+        ],
+        [
+         7.8,
+         22.6
+        ],
+        [
+         8.8,
+         23
+        ]
+       ],
+       "player": "1",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         18.3,
+         7.5
+        ],
+        [
+         17.8,
+         8
+        ],
+        [
+         2.9,
+         3.9
+        ]
+       ],
+       "player": "2",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         31.7,
+         6
+        ],
+        [
+         47.4,
+         3.9
+        ]
+       ],
+       "player": "3",
+       "type": "cut"
+      }
+     ],
+     "note": ""
+    }
+   ],
+   "updatedAt": "2026-11-02T18:43:42.778Z"
   }
  ]
 }
