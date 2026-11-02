@@ -1,7 +1,7 @@
 {
  "format": "playbook-board",
  "version": 1,
- "exportedAt": "2026-11-02T18:47:39.513Z",
+ "exportedAt": "2026-11-02T18:47:49.729Z",
  "plays": [
   {
    "id": "pmvl7pqo5wbi1",
@@ -3175,7 +3175,7 @@
    "note": "",
    "readout": [
     "Setup: 1 at the right elbow, 2 at out of bounds on the baseline with the ball, 3 at the left elbow, 4 at the left short corner, 5 at the right block.",
-    "Frame 1: Nothing drawn yet."
+    "Frame 1: 2 passes to 5 (the right block)."
    ],
    "setup": {
     "ball": "2",
@@ -3205,11 +3205,17 @@
    },
    "steps": [
     {
-     "actions": [],
+     "actions": [
+      {
+       "player": "2",
+       "to": "5",
+       "type": "pass"
+      }
+     ],
      "note": ""
     }
    ],
-   "updatedAt": "2026-11-02T18:47:33.100Z"
+   "updatedAt": "2026-11-02T18:47:43.314Z"
   }
  ]
 }
