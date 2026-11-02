@@ -1,7 +1,7 @@
 {
  "format": "playbook-board",
  "version": 1,
- "exportedAt": "2026-11-02T18:48:09.108Z",
+ "exportedAt": "2026-11-02T18:48:27.391Z",
  "plays": [
   {
    "id": "pmvl7pqo5wbi1",
@@ -3176,7 +3176,7 @@
    "readout": [
     "Setup: 1 at the right elbow, 2 at out of bounds on the baseline with the ball, 3 at the left elbow, 4 at the left short corner, 5 at the right block.",
     "Frame 1: 1 goes from the right elbow to set a screen at the high post. 3 cuts from the left elbow to the right wing. 2 passes to 5 (the right block).",
-    "Frame 2: Nothing drawn yet."
+    "Frame 2: 2 cuts from out of bounds on the baseline to under the basket. 4 cuts from the left short corner to the left wing. 1 cuts from the high post to the left slot."
    ],
    "setup": {
     "ball": "2",
@@ -3260,11 +3260,98 @@
      "note": ""
     },
     {
-     "actions": [],
+     "actions": [
+      {
+       "path": [
+        [
+         30.9,
+         -2.5
+        ],
+        [
+         34.5,
+         0.4
+        ],
+        [
+         35.8,
+         2.8
+        ],
+        [
+         36.3,
+         6.2
+        ],
+        [
+         35.6,
+         9
+        ],
+        [
+         34.1,
+         10.6
+        ],
+        [
+         32.5,
+         10.8
+        ],
+        [
+         28.4,
+         8.6
+        ],
+        [
+         26.6,
+         6.5
+        ]
+       ],
+       "player": "2",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         16.8,
+         7.3
+        ],
+        [
+         15.5,
+         7.9
+        ],
+        [
+         7.2,
+         7.8
+        ],
+        [
+         2.6,
+         11
+        ]
+       ],
+       "player": "4",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         24.8,
+         18.6
+        ],
+        [
+         15.6,
+         22.2
+        ],
+        [
+         14.8,
+         23.1
+        ],
+        [
+         14.5,
+         26.1
+        ]
+       ],
+       "player": "1",
+       "type": "cut"
+      }
+     ],
      "note": ""
     }
    ],
-   "updatedAt": "2026-11-02T18:48:02.699Z"
+   "updatedAt": "2026-11-02T18:48:20.975Z"
   }
  ]
 }
