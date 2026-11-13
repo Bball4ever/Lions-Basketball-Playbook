@@ -1,7 +1,7 @@
 {
  "format": "playbook-board",
  "version": 1,
- "exportedAt": "2026-11-13T22:32:43.330Z",
+ "exportedAt": "2026-11-13T22:42:45.432Z",
  "plays": [
   {
    "id": "pmvl7pqo5wbi1",
@@ -3359,12 +3359,488 @@
    "id": "pmwfjycvux7la",
    "court": "half",
    "createdAt": "2026-11-13T22:32:33.210Z",
-   "kind": "Man offense",
-   "name": "",
+   "kind": "Baseline inbound",
+   "name": "1",
    "note": "",
    "readout": [
-    "Setup: 1 at out of bounds on the baseline with the ball, 2 at the right block, 3 at the left block, 4 at the right elbow, 5 at the left elbow.",
-    "Frame 1: Nothing drawn yet."
+    "Setup: 1 at out of bounds on the baseline with the ball, 2 at the right block, 3 at the right elbow, 4 at the right block, 5 at the right mid-post.",
+    "Frame 1: 2 cuts from the right block to the right corner. 3 cuts from the right elbow to the right slot. 5 cuts from the right mid-post to the right block. 4 cuts from the right block to the left block.",
+    "Frame 2: 1 passes to 3 (the right slot).",
+    "Frame 3: 2 goes from the right corner to set a screen at the right short corner.",
+    "Frame 4: 1 cuts from out of bounds on the baseline to the right corner.",
+    "Frame 5: 3 passes to 1 (the right corner).",
+    "Frame 6: 1 shoots from the right corner."
+   ],
+   "setup": {
+    "ball": "1",
+    "players": {
+     "1": [
+      31.2,
+      -2.5
+     ],
+     "2": [
+      31.2,
+      6.7
+     ],
+     "3": [
+      31.3,
+      17.1
+     ],
+     "4": [
+      31.3,
+      10.2
+     ],
+     "5": [
+      31.3,
+      13.7
+     ]
+    },
+    "preset": null
+   },
+   "steps": [
+    {
+     "actions": [
+      {
+       "path": [
+        [
+         31.2,
+         6.7
+        ],
+        [
+         48,
+         4.2
+        ]
+       ],
+       "player": "2",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         31.3,
+         17.1
+        ],
+        [
+         37.7,
+         24.6
+        ]
+       ],
+       "player": "3",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         31.3,
+         13.7
+        ],
+        [
+         34.9,
+         13.2
+        ],
+        [
+         34.2,
+         7.8
+        ],
+        [
+         32.5,
+         3.7
+        ]
+       ],
+       "player": "5",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         31.3,
+         10.2
+        ],
+        [
+         29,
+         11.6
+        ],
+        [
+         24,
+         10.9
+        ],
+        [
+         21.3,
+         8.7
+        ],
+        [
+         19.5,
+         5.5
+        ]
+       ],
+       "player": "4",
+       "type": "cut"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "player": "1",
+       "to": "3",
+       "type": "pass"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "path": [
+        [
+         48,
+         4.2
+        ],
+        [
+         37.1,
+         1.9
+        ]
+       ],
+       "player": "2",
+       "type": "screen"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "path": [
+        [
+         31.2,
+         -2.5
+        ],
+        [
+         45,
+         1.6
+        ],
+        [
+         47.7,
+         3.2
+        ]
+       ],
+       "player": "1",
+       "type": "cut"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "player": "3",
+       "to": "1",
+       "type": "pass"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "player": "1",
+       "type": "shot"
+      }
+     ],
+     "note": ""
+    }
+   ],
+   "updatedAt": "2026-11-13T22:37:46.899Z"
+  },
+  {
+   "id": "pmwfk56onl0c5",
+   "court": "half",
+   "createdAt": "2026-11-13T22:37:51.767Z",
+   "kind": "Baseline inbound",
+   "name": "2",
+   "note": "",
+   "readout": [
+    "Setup: 1 at out of bounds on the baseline with the ball, 2 at the right block, 3 at the right mid-post, 4 at the right block, 5 at the right mid-post.",
+    "Frame 1: 2 cuts from the right block to the left corner. 4 cuts from the right block to the right corner. 5 sets a screen at the right mid-post. 3 cuts from the right mid-post to the right block.",
+    "Frame 2: 5 cuts from the right mid-post to the left block. 2 cuts from the left corner to the left slot. 4 cuts from the right corner to the right wing. 1 passes to 3 (the right block).",
+    "Frame 3: 3 dribbles from the right block and 1 comes from out of bounds on the baseline to meet 3. 3 hands off to 1 at the right short corner.",
+    "Frame 4: 1 dribbles from the right short corner to the right block."
+   ],
+   "setup": {
+    "ball": "1",
+    "players": {
+     "1": [
+      32.2,
+      -2.4
+     ],
+     "2": [
+      32.3,
+      4.6
+     ],
+     "3": [
+      32.2,
+      14.8
+     ],
+     "4": [
+      32.3,
+      8
+     ],
+     "5": [
+      32.4,
+      11.5
+     ]
+    },
+    "preset": null
+   },
+   "steps": [
+    {
+     "actions": [
+      {
+       "path": [
+        [
+         32.3,
+         4.6
+        ],
+        [
+         2.2,
+         2.3
+        ]
+       ],
+       "player": "2",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         32.3,
+         8
+        ],
+        [
+         42.4,
+         5.8
+        ],
+        [
+         47.7,
+         3.8
+        ]
+       ],
+       "player": "4",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         32.4,
+         11.5
+        ],
+        [
+         32.9,
+         11.5
+        ],
+        [
+         33,
+         15.3
+        ]
+       ],
+       "player": "5",
+       "type": "screen"
+      },
+      {
+       "path": [
+        [
+         32.2,
+         14.8
+        ],
+        [
+         34.5,
+         15.7
+        ],
+        [
+         35.8,
+         12
+        ],
+        [
+         34.8,
+         7.3
+        ],
+        [
+         33,
+         3.9
+        ]
+       ],
+       "player": "3",
+       "type": "cut"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "player": "1",
+       "to": "3",
+       "type": "pass"
+      },
+      {
+       "path": [
+        [
+         33,
+         15.3
+        ],
+        [
+         24.2,
+         8.9
+        ],
+        [
+         17.7,
+         5.2
+        ]
+       ],
+       "player": "5",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         2.2,
+         2.3
+        ],
+        [
+         1.4,
+         2.4
+        ],
+        [
+         1.8,
+         3.7
+        ],
+        [
+         8.4,
+         23.3
+        ],
+        [
+         9.1,
+         24.3
+        ],
+        [
+         10.3,
+         24.5
+        ]
+       ],
+       "player": "2",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         47.7,
+         3.8
+        ],
+        [
+         48,
+         6.5
+        ],
+        [
+         47.1,
+         15.9
+        ],
+        [
+         45.8,
+         18.3
+        ],
+        [
+         41.5,
+         21.4
+        ]
+       ],
+       "player": "4",
+       "type": "cut"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "meet": [
+        [
+         32.2,
+         -2.4
+        ],
+        [
+         37.3,
+         6.5
+        ]
+       ],
+       "path": [
+        [
+         33,
+         3.9
+        ],
+        [
+         33.8,
+         3.9
+        ],
+        [
+         34.4,
+         5.1
+        ]
+       ],
+       "player": "3",
+       "to": "1",
+       "type": "handoff"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "path": [
+        [
+         37.3,
+         6.5
+        ],
+        [
+         37.4,
+         7.3
+        ],
+        [
+         33.6,
+         9.6
+        ],
+        [
+         31,
+         9.7
+        ],
+        [
+         30.7,
+         9.1
+        ]
+       ],
+       "player": "1",
+       "type": "dribble"
+      }
+     ],
+     "note": ""
+    }
+   ],
+   "updatedAt": "2026-11-13T22:40:44.242Z"
+  },
+  {
+   "id": "pmwfk8y36tpa3",
+   "court": "half",
+   "createdAt": "2026-11-13T22:40:47.250Z",
+   "kind": "Baseline inbound",
+   "name": "3",
+   "note": "",
+   "readout": [
+    "Setup: 1 at out of bounds on the baseline with the ball, 2 at the right block, 3 at the right elbow, 4 at the right block, 5 at the right mid-post.",
+    "Frame 1: 4 goes from the right block to set a screen at the right mid-range.",
+    "Frame 2: 3 cuts from the right elbow to the right corner. 2 drops down in the right block. 5 cuts from the right mid-post to the left block.",
+    "Frame 3: 4 cuts from the right mid-range to under the basket.",
+    "Frame 4: 1 passes to 4 (under the basket).",
+    "Frame 5: 4 shoots from under the basket."
    ],
    "setup": {
     "ball": "1",
@@ -3374,31 +3850,171 @@
       -2.5
      ],
      "2": [
-      31.9,
-      7.5
+      32.6,
+      10.5
      ],
      "3": [
-      18,
-      8
+      32.7,
+      17.1
      ],
      "4": [
-      31,
-      19
+      32.5,
+      7.1
      ],
      "5": [
-      19,
-      19
+      32.6,
+      13.8
      ]
     },
     "preset": null
    },
    "steps": [
     {
-     "actions": [],
+     "actions": [
+      {
+       "path": [
+        [
+         32.5,
+         7.1
+        ],
+        [
+         35.3,
+         7.8
+        ],
+        [
+         37,
+         9.3
+        ],
+        [
+         36.2,
+         13.1
+        ],
+        [
+         34.7,
+         14.2
+        ]
+       ],
+       "player": "4",
+       "type": "screen"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "path": [
+        [
+         32.7,
+         17.1
+        ],
+        [
+         42,
+         10.3
+        ],
+        [
+         47.4,
+         4.7
+        ]
+       ],
+       "player": "3",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         32.6,
+         10.5
+        ],
+        [
+         33,
+         3.6
+        ]
+       ],
+       "player": "2",
+       "type": "cut"
+      },
+      {
+       "path": [
+        [
+         32.6,
+         13.8
+        ],
+        [
+         27.1,
+         14.4
+        ],
+        [
+         22.9,
+         13.3
+        ],
+        [
+         19.1,
+         9.8
+        ],
+        [
+         17.1,
+         5.9
+        ]
+       ],
+       "player": "5",
+       "type": "cut"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "path": [
+        [
+         34.7,
+         14.2
+        ],
+        [
+         30.3,
+         14.1
+        ],
+        [
+         27.1,
+         12.6
+        ],
+        [
+         25.9,
+         11
+        ],
+        [
+         25.3,
+         6.9
+        ]
+       ],
+       "player": "4",
+       "type": "cut"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "player": "1",
+       "to": "4",
+       "type": "pass"
+      }
+     ],
+     "note": ""
+    },
+    {
+     "actions": [
+      {
+       "player": "4",
+       "type": "shot"
+      }
+     ],
      "note": ""
     }
    ],
-   "updatedAt": "2026-11-13T22:32:42.926Z"
+   "updatedAt": "2026-11-13T22:42:15.268Z"
   }
  ]
 }
